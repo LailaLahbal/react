@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class Button extends React.Component {
+            constructor(props) {
+                super(props);
+                // lié la méthode au this de la classe
+                this.click = this.click.bind(this);
+                this.state = { count: 0 };
+            }
+            // arrow function
+            click = (e) => {
+                switch (e.target.name) {
+                    case 'StartOne':
+                        this.myInterval = setInterval(
+                            () => {
+                                this.setState({
+                                    count: this.state.count + 1
+                                });
+                            }, 1000
+                        )
+                        break;
+
+                    case 'StopOne':
+
+                        clearInterval(this.myInterval);
+
+                        break;
+
+                    case 'Reset':
+
+                        this.state.count = 0;
+
+                        break;
+
+                        case 'StartTwo':
+                        this.myInterval = setInterval(
+                            () => {
+                                this.setState({
+                                    count: this.state.count + 2
+                                });
+                            }, 1000
+                        )
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+            render() {
+                return (
+                    <div> <button name="StartOne" onClick={this.click}>Start +1 !</button>
+                        <button name="StopOne" onClick={this.click}>Stop !</button>
+                        <button name="Reset" onClick={this.click}>Reset !</button>
+                        <p>Time: {this.state.count}</p>
+                        <button name="StartTwo" onClick={this.click}>Start +2 !</button>
+                        <button name="StopTwo" onClick={this.click}>Stop !</button>
+                        <p>Time: {this.state.count}</p></div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Button />, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>
