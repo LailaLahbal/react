@@ -24,7 +24,7 @@
                 super(props);
                 // lié la méthode au this de la classe
                 this.click = this.click.bind(this);
-                this.state = { count: 0 };
+                this.state = { count: 0, count2: 0};
             }
             // arrow function
             click = (e) => {
@@ -39,7 +39,7 @@
                         )
                         break;
 
-                    case 'StopOne':
+                    case 'Stop':
 
                         clearInterval(this.myInterval);
 
@@ -55,7 +55,7 @@
                         this.myInterval = setInterval(
                             () => {
                                 this.setState({
-                                    count: this.state.count + 2
+                                    count2: this.state.count2 + 2
                                 });
                             }, 1000
                         )
@@ -69,12 +69,12 @@
             render() {
                 return (
                     <div> <button name="StartOne" onClick={this.click}>Start +1 !</button>
-                        <button name="StopOne" onClick={this.click}>Stop !</button>
+                        <button name="Stop" onClick={this.click}>Stop !</button>
                         <button name="Reset" onClick={this.click}>Reset !</button>
                         <p>Time: {this.state.count}</p>
                         <button name="StartTwo" onClick={this.click}>Start +2 !</button>
-                        <button name="StopTwo" onClick={this.click}>Stop !</button>
-                        <p>Time: {this.state.count}</p></div>
+                        <button name="Stop" onClick={this.click}>Stop !</button>
+                        <p>Time: {this.state.count2}</p></div>
                 )
             }
         }
