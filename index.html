@@ -47,13 +47,12 @@
         }
 
         class App extends React.Component {
-        
 
             render() {
                 return (
 
                     <div>
-                        {this.props.choice ?  <ListKnight /> :  <ListDragon />}
+                        {this.props.choice=='Knight' ? <ListKnight /> : <ListDragon />}
                     </div>
 
 
@@ -61,7 +60,7 @@
             }
         }
         ReactDOM.render(
-            <App />,
+            <App choice='Dragon'/>,
             document.getElementById('root')
         );
     </script>
