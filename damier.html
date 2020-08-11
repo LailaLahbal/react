@@ -42,6 +42,9 @@
         }
 
         class Checkerboard extends React.Component {
+
+
+
             renderSquare(i, color) {
                 return <Square value={i} color={color} />;
             }
@@ -52,12 +55,14 @@
 
                     <table>
                         <tbody>
-                            <tr>
-                                {colors.map((value, index) => {
-                                    return <td key={index}>  {this.renderSquare(index, value)}</td>
-                                })}
+                            {[...Array(this.props.lenght)].map((x, i) => {
+                                return <tr key={i}>
+                                    {colors.map((value, index) => {
+                                        return <td key={index}>  {this.renderSquare(index, value)}</td>
+                                    })}
 
-                            </tr>
+                                </tr>
+                            })}
                         </tbody>
                     </table>
 
@@ -68,7 +73,7 @@
 
 
         ReactDOM.render(
-            <Checkerboard />,
+            <Checkerboard lenght={4} />,
             document.getElementById('root')
         );
 
