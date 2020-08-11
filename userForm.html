@@ -24,8 +24,9 @@
 
                 return (
                     <div>
+                    <h1> User's List</h1>
                         {this.props.value.map((value, index) => {
-                            return <div key={index}>{value}
+                            return <div key={index}>{`User N°` +(index+1)} : {value}
                             </div>
 
                         })}
@@ -45,7 +46,7 @@
 
             constructor(props) {
                 super(props);
-                this.state = { value: '', listUsers: [] };
+                this.state = { value: '', listUsers: [], message: '' };
             }
 
             handleChange = (event) => {
@@ -53,11 +54,14 @@
             }
 
 
+
+
             handleSubmit = (event) => {
                 //   console.log(`New User : ${this.state.value}`);
 
                 if (!this.state.value) {
-                    console.log(`You should enter your userName !`);
+                    this.setState({ message: `You should enter your userName !` });
+
                 }
                 else {
 
@@ -66,15 +70,14 @@
                             this.state.value
                         ),
 
-                            this.setState({ listUsers: this.state.listUsers }),
+                            this.setState({ listUsers: this.state.listUsers })
 
-                            console.log(`List Users : ${this.state.listUsers}`);
 
                     }
 
                     else {
+                        this.setState({ message: `This userName is already used !` });
 
-                        console.log(`This userName is already used !`);
                     }
                 }
                 event.preventDefault();
@@ -84,14 +87,17 @@
 
             render() {
                 return (
-                    <div> <form onSubmit={this.handleSubmit}>
+                    <div> 
+                    <input type="text" value={this.state.message} disabled />
+                    
+                    <form onSubmit={this.handleSubmit}>
                         <label>
                             Username:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Add" />
                     </form>
-
+                      
                         <ListUsers value={this.state.listUsers} /></div>
                 )
             }
