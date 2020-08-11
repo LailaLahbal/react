@@ -29,9 +29,7 @@
                 return (
                     <div>
                         {this.props.value.map((elem, y) => {
-                                        return <div key={elem.key}>{elem.hash}</div>
-
-                                      
+                                        return <div key={elem.key}>{elem.key} :  {elem.hash}</div>
                                     })}
                     </div>
                 )
@@ -55,13 +53,15 @@
                         hash: Math.random().toString(16)
                     }
                 )
-                return   <div><Elems value={this.state.elems}/></div>
+                 
+             this.setState({elems: this.state.elems})
                   
             }
 
             render() {
                 return (
                     <div> <button name="generate" onClick={this.click}>generate</button>
+                    <div><Elems value={this.state.elems}/></div>
                     </div>
                 )
             }
