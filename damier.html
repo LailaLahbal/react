@@ -55,11 +55,11 @@
 
                     <table>
                         <tbody>
-                            {[...Array(this.props.lenght)].map((x, i) => {
+                            {[...Array(this.props.lenght)].map((element, x) => {
                              
-                                return <tr key={i}>
-                                    {colors.map((value, index) => {
-                                        return <td key={index}>  {this.renderSquare((i*this.props.lenght)+index, value)}</td>;
+                                return <tr key={x}>
+                                    {colors.map((value, y) => {
+                                        return <td key={y}>  {this.renderSquare((x*this.props.lenght)+y, value)}</td>;
                                       
                                     })}
 
