@@ -24,13 +24,26 @@
 
         class Elems extends React.Component {
 
+            constructor(props) {
+                super(props);
+                this.handler = this.handler.bind(this);
+                this.state = { elems: [] }
+
+            }
+            handler(key, e) {
+                this.props.remove(key, e);
+
+            }
+
             render() {
 
                 return (
                     <div>
                         {this.props.value.map((elem, y) => {
-                                        return <div key={elem.key}>{elem.key} :  {elem.hash}</div>
-                                    })}
+                            return <div key={elem.key}>{elem.key} :  {elem.hash}
+                                <button onClick={(e) => this.handler(elem.key, e)} >Delete</button></div>
+
+                        })}
                     </div>
                 )
 
@@ -53,15 +66,23 @@
                         hash: Math.random().toString(16)
                     }
                 )
-                 
-             this.setState({elems: this.state.elems})
-                  
+
+                this.setState({ elems: this.state.elems })
+
             }
+
+            removeHandler = (key) => {
+                this.state.elems.splice(key, 1);
+                this.setState({ elems: this.state.elems })
+
+            }
+
+
 
             render() {
                 return (
                     <div> <button name="generate" onClick={this.click}>generate</button>
-                    <div><Elems value={this.state.elems}/></div>
+                        <div><Elems value={this.state.elems} remove={this.removeHandler} /></div>
                     </div>
                 )
             }
