@@ -30,8 +30,9 @@
                 this.state = { elems: [] }
 
             }
-            handler(key, e) {
-                this.props.remove(key, e);
+            handler(index, e) {
+
+                this.props.remove(index, e);
 
             }
 
@@ -41,7 +42,7 @@
                     <div>
                         {this.props.value.map((elem, y) => {
                             return <div key={elem.key}>{elem.key} :  {elem.hash}
-                                <button onClick={(e) => this.handler(elem.key, e)} >Delete</button></div>
+                                <button onClick={(e) => this.handler(y, e)} >Delete</button></div>
 
                         })}
                     </div>
@@ -60,6 +61,7 @@
 
             }
             click = (e) => {
+                
                 this.state.elems.push(
                     {
                         key: Math.random() + "",
@@ -71,8 +73,8 @@
 
             }
 
-            removeHandler = (key) => {
-                this.state.elems.splice(key, 1);
+            removeHandler = (index) => {
+                this.state.elems.splice(index, 1);
                 this.setState({ elems: this.state.elems })
 
             }
