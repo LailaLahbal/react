@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class ListUsers extends React.Component {
+            render() {
+
+                return (
+                    <div>
+                        {this.props.value.map((value, index) => {
+                            return <div key={index}>{value}
+                            </div>
+
+                        })}
+                    </div>
+                )
+
+            }
+
+
+
+        }
+
+
+
+        class UserForm extends React.Component {
+
+
+            constructor(props) {
+                super(props);
+                this.state = { value: '', listUsers: [] };
+            }
+
+            handleChange = (event) => {
+                this.setState({ value: event.target.value });
+            }
+
+
+            handleSubmit = (event) => {
+                //   console.log(`New User : ${this.state.value}`);
+
+                if (!this.state.value) {
+                    console.log(`You should enter your userName !`);
+                }
+                else {
+
+                    if (!this.state.listUsers.find(username => username == this.state.value)) {
+                        this.state.listUsers.push(
+                            this.state.value
+                        ),
+
+                            this.setState({ listUsers: this.state.listUsers }),
+
+                            console.log(`List Users : ${this.state.listUsers}`);
+
+                    }
+
+                    else {
+
+                        console.log(`This userName is already used !`);
+                    }
+                }
+                event.preventDefault();
+
+            }
+
+
+            render() {
+                return (
+                    <div> <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Username:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Add" />
+                    </form>
+
+                        <ListUsers value={this.state.listUsers} /></div>
+                )
+            }
+        }
+
+        ReactDOM.render(<UserForm />, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>
