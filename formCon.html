@@ -8,8 +8,12 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -32,30 +36,27 @@
 
             constructor(props) {
                 super(props);
-                this.state = { email: '',password: '', listUsers: [], message: '' };
+                this.state = { email: '', password: '', listUsers: [], message: '', messageStatut: '' };
             }
 
-            handleChange = (event) => {
-                this.setState({ 
-                    email: event.target.value,
-                    });
-                
+
+            handleChange = (e) => {
+                this.setState({
+                    [e.target.name]: e.target.value,
+
+                })
             }
 
-            handleChangePassword = (event) => {
-                this.setState({ 
-                    password: event.target.value
-                    });
-                
-            }
+
 
 
 
 
             handleSubmit = (event) => {
-                
+
                 if (!this.state.email) {
-                    this.setState({ message: `You should enter your email !` });
+                    this.setState({ message: `You should enter your email !`, messageStatut: "Warning" });
+
 
                 }
                 else {
@@ -67,13 +68,15 @@
                         ),
 
                             this.setState({ listUsers: this.state.listUsers }),
-                            this.setState({ message: `Success !` });
+                            this.setState({ message: `Success !`, messageStatut: "Success" });
+
 
 
                     }
 
                     else {
-                        this.setState({ message: `This email is already used !` });
+                        this.setState({ message: `This email is already used !`, messageStatut: "Warning" });
+
 
                     }
                 }
@@ -86,18 +89,19 @@
                 return (
                     <div>
                         <form onSubmit={this.handleSubmit}>
-                            <div className="alert alert-success">
-                               {this.state.message}
+                         
+                                <div className={`alert ${this.state.messageStatut=="Success" ? "alert-success" : "alert-warning"}`}>
+                                {this.state.message}
                             </div>
                             <div className="form-group">
                                 <label>Email address</label>
-                                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                    placeholder="Enter email" value={this.state.email} onChange={this.handleChange}/>
+                                <input type="email" className="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"
+                                    placeholder="Enter email" value={this.state.email} onChange={this.handleChange} />
                                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                             <div className="form-group">
                                 <label >Password</label>
-                                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={this.state.password} onChange={this.handleChangePassword}/>
+                                <input type="password" className="form-control" id="exampleInputPassword1" name ="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
                             </div>
                             <button type="submit" className="btn btn-primary" >Submit</button>
                         </form>
